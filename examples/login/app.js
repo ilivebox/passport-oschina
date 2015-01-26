@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var expressLayouts = require('express-ejs-layouts');
 
 var passport = require('passport');
@@ -52,6 +53,11 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(expressLayouts);
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
 
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
@@ -107,7 +113,9 @@ app.get('/logout', function(req, res) {
 });
 
 var port = process.env.PORT || "3000";
-app.listen(port);
+app.listen(port, function() {
+    console.log("Server listen to " + port);
+});
 
 
 // Simple route middleware to ensure user is authenticated.

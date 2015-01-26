@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "dependencies": {
         "express": "latest",
+        "express-session" : "latest",
         "ejs": "latest",
         "express-ejs-layouts": "latest",
         "passport": "latest",
