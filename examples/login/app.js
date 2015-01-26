@@ -1,11 +1,12 @@
 var express = require('express');
+var expressLayouts = require('express-ejs-layouts');
+
 var passport = require('passport');
 var util = require('util');
 var OSChinaStrategy = require('passport-oschina').Strategy;
 
 var OSCHINA_CLIENT_ID = "--insert-oschina-client-id-here--"
 var OSCHINA_CLIENT_SECRET = "--insert-oschina-client-secret-here--";
-
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -22,7 +23,6 @@ passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
 
-
 // Use the OSChinaStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and OSChina
@@ -30,7 +30,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new OSChinaStrategy({
         clientID: OSCHINA_CLIENT_ID,
         clientSecret: OSCHINA_CLIENT_SECRET,
-        callbackURL: "http://127.0.0.1:3000/auth/oschina/callback"
+        callbackURL: "https://localhost:3000/auth/oschina/callback"
     },
     function(accessToken, refreshToken, profile, done) {
         // asynchronous verification, for effect...
@@ -45,27 +45,18 @@ passport.use(new OSChinaStrategy({
     }
 ));
 
-var app = express.createServer();
+var app = express();
 
 // configure Express
-app.configure(function() {
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'ejs');
-    app.use(express.logger());
-    app.use(express.cookieParser());
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-    app.use(express.session({
-        secret: 'keyboard cat'
-    }));
-    // Initialize Passport!  Also use passport.session() middleware, to support
-    // persistent login sessions (recommended).
-    app.use(passport.initialize());
-    app.use(passport.session());
-    app.use(app.router);
-    app.use(express.static(__dirname + '/public'));
-});
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+app.use(expressLayouts);
 
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/', function(req, res) {
     res.render('index', {
@@ -115,7 +106,8 @@ app.get('/logout', function(req, res) {
     res.redirect('/');
 });
 
-app.listen(3000);
+var port = process.env.PORT || "3000";
+app.listen(port);
 
 
 // Simple route middleware to ensure user is authenticated.

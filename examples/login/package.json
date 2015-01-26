@@ -2,10 +2,11 @@
     "name": "passport-oschina-examples-login",
     "version": "0.0.0",
     "dependencies": {
-        "express": ">= 0.0.0",
-        "ejs": ">= 0.0.0",
-        "passport": ">= 0.0.0",
-        "passport-oschina": ">= 0.0.0"
+        "express": "latest",
+        "ejs": "latest",
+        "express-ejs-layouts": "latest",
+        "passport": "latest",
+        "passport-oschina": "latest"
     },
     "license": "MIT"
 }
