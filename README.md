@@ -52,6 +52,17 @@ application:
         res.redirect('/');
       });
 
+## Examples
+
+For a complete, working example, refer to the [login example](https://github.com/geminiyellow/passport-oschina/tree/master/examples/login).
+
+## Tests
+
+    $ npm install --dev
+    $ make test
+
+[![Build Status](https://secure.travis-ci.org/geminiyellow/passport-oschina.png)](http://travis-ci.org/geminiyellow/passport-oschina)
+
 ## Credits
 
   - [geminiyellow](https://github.com/geminiyellow)
