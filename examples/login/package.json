@@ -6,6 +6,6 @@
         "ejs": ">= 0.0.0",
         "passport": ">= 0.0.0",
         "passport-oschina": ">= 0.0.0"
-    }
+    },
     "license": "MIT"
 }
