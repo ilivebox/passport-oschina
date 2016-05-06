@@ -1,3 +1,5 @@
+# THIS PROJECT IS DEPRECATED
+
 # passport-oschina
 
 [Passport](http://passportjs.org/) strategy for authenticating with [OSChina](https://www.oschina.net/)
